@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+          <section class="wrapper">
+          	<h3><i class="fa fa-angle-right"></i>Reserve Tool</h3>
+				<div class="row">
+				
+	                  <div class="col-md-12">
+	                  	  <div class="content-panel">
+	                  	  <hr>
+	                  	
+
+		                <h2>The tool is available from {{nextDate}}</h2>
+
+		                <h3>To reserve the tool, please fill up the form</h3> 
+		                <form class="form-horizontal style-form" method="POST" action="">
+		                {% csrf_token %}
+		                {{ home_form.messages }}<br/>
+		                {{error}}
+		                {{ home_form.days }} <br/>
+		                
+						<input type="submit" value="Send Message" class="btn btn-theme btn-block">
+                        </form>
+						
+	                  	  </div><!--/content-panel -->
+	                  </div><!-- /col-md-12 -->
+				</div><!-- row -->
+
+		</section><!--/wrapper -->
+
+
+
+{% endblock %}
+
+
+{% block admin %}
+		{% if request.session.isAdmin %}
+				  <li class="sub-menu dcjq-parent-li">
+                      <a href="" class="dcjq-parent">
+                          <i class="fa fa-desktop"></i>
+                          <span>Admin Options</span>
+                      <span class="dcjq-icon"></span></a>
+                      <ul class="sub" style="overflow: hidden; display: block;">
+                          <li><a href="/addAdmin">Add Admin</a></li>
+                          <li><a href="/manage_users">Manage Users</a></li>
+						  <li><a href="/edit_shed">Edit Shed Details</a></li>
+						  <li><a href="/statistics">Statistics</a></li>
+                      </ul>
+                  </li>
+		{% endif %}
+{% endblock %}

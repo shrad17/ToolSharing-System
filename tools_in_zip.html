@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+          <section class="wrapper">
+          	<h3><i class="fa fa-angle-right"></i> Tools in Zip</h3>
+				<div class="row">
+				
+	                  <div class="col-md-12">
+	                  	  <div class="content-panel">
+	                  	  	  <h4><i class="fa fa-angle-right"></i> View Tools in current zipcode</h4>
+	                  	  	  <hr>
+		                      <table class="table">
+		                         <thead>
+		                          <tr>
+		                              <th>Name</th>
+		                              <th>Photo</th>
+		                              <th>Description</th>
+		                              <th>Instructions</th>
+		                              <th>Category</th>
+		                              <!--<th>Pickup Preference</th>-->
+		                              <th>Address</th>
+		                              <th>Owner</th>
+		                              <th>Condition</th>
+		                              <th>Action</th>
+		                          </tr>
+		                          </thead>
+		                          <tbody>
+							{% for tool in tool_list %}
+		                          <tr>
+		                              <td>{{ tool.1 }}</td>
+		                              <td><img src="/static/imgs/{{tool.2}}" width=150 height=150></td>
+		                              <td>{{ tool.3 }}</td>
+		                              <td>{{ tool.4 }}</td>
+		                              <td>{{ tool.5 }}</td>
+		                              <td>{{ tool.6 }}</td>
+		                              <td>{{ tool.7 }}</td>
+		                              <td>{{ tool.10 }}</td>
+		                              
+		                             
+		                              {% if tool.8 %}
+									  <td><a href="./tid/{{ tool.0 }}"><button type="button" class="btn btn-theme"><i class="fa fa-cog"></i> Request Now</button></a></td>
+
+									  {% else %}
+									  {% if not tool.9%}
+									  <td><a href="./reserve/{{ tool.0 }}"><button type="button" class="btn btn-theme"><i class="fa fa-cog"></i> Reserve </button></a></td>
+									  {% else %}
+
+									  <td><a href=""><button type="button" class="btn btn-theme" disabled><i class="fa fa-cog" ></i> Currently Reserved
+									  </button></a></td>
+									  {% endif %}
+
+
+
+									  {% endif %}
+
+
+								  </tr>
+							{% endfor %}
+		                          </tbody>
+		                      </table>
+	                  	  </div><!--/content-panel -->
+	                  </div><!-- /col-md-12 -->
+				</div><!-- row -->
+
+		</section><!--/wrapper -->
+
+
+
+{% endblock %}
+
+
+{% block admin %}
+		{% if request.session.isAdmin %}
+				  <li class="sub-menu dcjq-parent-li">
+                      <a href="" class="dcjq-parent">
+                          <i class="fa fa-desktop"></i>
+                          <span>Admin Options</span>
+                      <span class="dcjq-icon"></span></a>
+                      <ul class="sub" style="overflow: hidden; display: block;">
+                          <li><a href="/addAdmin">Add Admin</a></li>
+                          <li><a href="/manage_users">Manage Users</a></li>
+						  <li><a href="/edit_shed">Edit Shed Details</a></li>
+						  <li><a href="/statistics">Statistics</a></li>
+                      </ul>
+                  </li>
+		{% endif %}
+{% endblock %}

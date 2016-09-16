@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+          <section class="wrapper">
+          	<h3><i class="fa fa-angle-right"></i> Messages</h3>
+          	
+          	<!-- BASIC FORM ELELEMNTS -->
+          	<div class="row mt">
+          		<div class="col-lg-12">
+                  <div class="form-panel">
+
+                  <table class="table">
+                             <thead>
+                              <tr>
+                                  <th>Borrower</th>
+                                  <th>Message</th>
+                                  <th>Tool</th>
+                                  <th>Days</th>
+                                  <th>Accept</th>
+                                  <th>Reject</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+
+
+                  {% for message in list %}
+                              <tr>
+                                  <td>{{ message.1 }}</td>
+                                  <td>{{ message.2 }}</td>
+                                  <td>{{ message.3 }}</td>
+                                  <td>{{ message.5 }}</td>
+              
+                    
+                    <form action="#" method="get"><input type="hidden" value="{{message.4}}" name="value">
+                    <td>{% csrf_token %}<input type="submit" class="btn btn-theme" value="Accept" name="Accept"></td>
+                  
+
+                  <td><input type="submit" class="btn btn-theme" value="Reject" name="Reject"></form></td>
+                  </tr>
+              {% endfor %}
+
+
+                  {% for message in rlist %}
+                              <tr>
+                                  <td>{{ message.1 }}</td>
+                                  <td>{{ message.2 }}</td>
+                                  <td>{{ message.3 }}</td>
+                                  <td>{{ message.4 }}</td>
+                
+                    
+                    <form action="" method="get"><input type="hidden" value="{{message.5}}" name="value">
+                    <td>{% csrf_token %}<input type="submit" class="btn btn-theme" value="Accept" name="rAccept"></td>
+                  
+
+                  <td><input type="submit" class="btn btn-theme" value="Reject" name="rReject"></form></td>
+                  </tr>
+              {% endfor %}
+                          </tbody>
+                          </table>            
+
+
+
+                  </div>
+          		</div><!-- col-lg-12-->      	
+          	</div><!-- /row -->
+          	
+		</section>
+
+
+{% endblock %}
+
+
+{% block admin %}
+		{% if request.session.isAdmin %}
+				  <li class="sub-menu dcjq-parent-li">
+                      <a href="" class="dcjq-parent">
+                          <i class="fa fa-desktop"></i>
+                          <span>Admin Options</span>
+                      <span class="dcjq-icon"></span></a>
+                      <ul class="sub" style="overflow: hidden; display: block;">
+                          <li><a href="/addAdmin">Add Admin</a></li>
+                          <li><a href="/manage_users">Manage Users</a></li>
+						  <li><a href="/edit_shed">Edit Shed Details</a></li>
+						  <li><a href="/statistics">Statistics</a></li>
+                      </ul>
+                  </li>
+		{% endif %}
+{% endblock %}

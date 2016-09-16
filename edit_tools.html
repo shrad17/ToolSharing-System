@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+          <section class="wrapper">
+          	<h3><i class="fa fa-angle-right"></i> Edit Tool</h3>
+          	{{ delete_error }}
+          	<!-- BASIC FORM ELELEMNTS -->
+          	<div class="row mt">
+          		<div class="col-lg-12">
+
+
+              <!--end -->
+                  <div class="form-panel">
+					<table id="toolopts"><tr>
+						{% if available %}
+						{{ error }}
+						<td>
+						<form action="" method="get">
+						<input type="submit" class="btn btn-warning" value="Deactivate tool" name="deactivate" />
+						</form>
+						</td>
+						{% else %}
+						<td>
+						<form action="" method="get">
+						<input type="submit" class="btn btn-theme" value="Activate tool" name="activate" />
+						</form>
+						</td>
+						{% endif %}
+
+						<!-- Buttons to move to shed or vice versa -->
+
+						{% if home %}     
+
+						<td>
+						<form action="" method="get">
+						{% csrf_token %}
+						<input type="hidden" value="{{ tool.0 }}" name="value">
+						<input type="submit" class="btn btn-theme" value="Move to Shed" name="Move" />
+						</form>
+						</td> 
+
+						{% else %}
+
+						<td>
+						<form action="" method="get">
+						{% csrf_token %}
+						<input type="hidden" value="{{ tool.0 }}" name="value">
+						<input type="submit" class="btn btn-theme" value="Move to Home" name="Home" />
+						</form>
+						</td>
+					  
+					  {% endif %}
+						<td>
+					  <!-- Button for Delete -->
+						<form action="" method="get">
+						{% csrf_token %}
+						<input type="hidden" value="{{ tool.0 }}" name="value">
+						<input type="submit" class="btn btn-danger" value="Delete" name="Delete" />
+						</form>
+					  <!-- END-->
+						</td>
+					</tr></table>
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Edit Tool</h4>
+                      <form id="editprofile" class="form-horizontal style-form" method="POST" enctype="multipart/form-data" action="">
+							{% csrf_token %}
+							{{ form.as_p }}<br/>
+							<input type="submit" value="Update" class="btn btn-theme btn-block">
+                      </form>
+
+            
+
+
+                  </div>
+          		</div>  	
+          	</div>
+          	
+		</section>
+    {% endblock %}
+	
+	
+{% block admin %}
+		{% if request.session.isAdmin %}
+				  <li class="sub-menu dcjq-parent-li">
+                      <a href="" class="dcjq-parent">
+                          <i class="fa fa-desktop"></i>
+                          <span>Admin Options</span>
+                      <span class="dcjq-icon"></span></a>
+                      <ul class="sub" style="overflow: hidden; display: block;">
+                          <li><a href="/addAdmin">Add Admin</a></li>
+                          <li><a href="/manage_users">Manage Users</a></li>
+						  <li><a href="/edit_shed">Edit Shed Details</a></li>
+						  <li><a href="/statistics">Statistics</a></li>
+                      </ul>
+                  </li>
+		{% endif %}
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block content %}
+          <section class="wrapper">
+          	<h3><i class="fa fa-angle-right"></i> Profile</h3>
+		  		<div class="row mt">
+			  		<div class="col-lg-12">
+                      <div class="content-panel">
+                      <h4><i class="fa fa-angle-right"></i> User Profile</h4>
+                          <section id="unseen">
+                            <table class="table table-bordered table-striped table-condensed">
+                              <thead>
+                              <tr>
+                                  <th></th>
+                                  <th></th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr>
+                                  <td>First Name</td>
+                                  <td>{{first_name}}</td>
+                              </tr>
+                              <tr>
+                                  <td>Last Name</td>
+                                  <td>{{last_name}}</td>
+                              </tr>
+                              <tr>
+                                  <td>Email</td>
+                                  <td>{{email}}</td>
+                              </tr>
+                              <tr>
+                                  <td>ZipCode</td>
+                                  <td>{{zipcode}}</td>
+                              </tr>
+                              <tr>
+                                  <td>Address</td>
+                                  <td>{{address}}</td>
+                              </tr>
+                              <tr>
+                                  <td>Pick Up Arrangements</td>
+                                  <td>{{arrangement}}</td>
+                              </tr>
+                              </tbody>
+                          </table>
+                          </section>
+                  </div><!-- /content-panel -->
+               </div><!-- /col-lg-4 -->			
+		  	</div><!-- /row -->
+		
+		</section><!-- /wrapper -->
+          <section class="wrapper">
+          	<h3><i class="fa fa-angle-right"></i> User Statistics</h3>
+		  		<div class="row mt">
+			  		<div class="col-lg-12">
+                      <div class="content-panel">
+                      <h4><i class="fa fa-angle-right"></i>Tool Statistics</h4>
+                          <section id="unseen">
+
+                            <table class="table table-bordered table-striped table-condensed">
+                              <thead>
+                              <b><b>
+                              </thead>
+                              <tbody>
+                              <tr>
+                                  <td>Number of Tools</td>
+                                  <td>{{tools}}</td>
+                              </tr>
+                              <tr>
+                                  <td>Number of times Lent</td>
+                                  <td>{{ lent }}</td>
+                              </tr>
+                              <tr>
+                                  <td>Number of times borrowed</td>
+                                  <td>{{ borrow }}</td>
+                              </tr>
+                              
+                              </tbody>
+                          </table>
+                          </section>
+                  </div><!-- /content-panel -->
+               </div><!-- /col-lg-4 -->			
+		  	</div><!-- /row -->
+		</section><!-- /wrapper -->
+		{% if isAdmin %}
+          <section class="wrapper">
+          	<h3><i class="fa fa-angle-right"></i> Shed</h3>
+		  		<div class="row mt">
+			  		<div class="col-lg-12">
+                      <div class="content-panel">
+                      <h4><i class="fa fa-angle-right"></i> Shed Details</h4>
+                          <section id="unseen">
+
+
+
+
+                          <table class="table table-bordered table-striped table-condensed">
+                              <thead>
+                              <b><b>
+                              </thead>
+                              <tbody>
+                              <tr>
+                                  <td>Shed Name</td>
+                                  <td>{{shed_name}}</td>
+                              </tr>
+                              <tr>
+                                  <td>Shed Address</td>
+                                  <td>{{ shed_address }}</td>
+                              </tr>
+                              <tr>
+                                  <td>Shed Contact Info</td>
+                                  <td>{{ shed_email }}</td>
+                              </tr>
+                              
+                              </tbody>
+                          </table>
+                          </section>
+                  </div><!-- /content-panel -->
+               </div><!-- /col-lg-4 -->			
+		  	</div><!-- /row -->
+
+		</section><!-- /wrapper -->
+		
+		{% endif %}
+{% endblock %}
+
+{% block admin %}
+		{% if request.session.isAdmin %}
+				  <li class="sub-menu dcjq-parent-li">
+                      <a href="" class="dcjq-parent">
+                          <i class="fa fa-desktop"></i>
+                          <span>Admin Options</span>
+                      <span class="dcjq-icon"></span></a>
+                      <ul class="sub" style="overflow: hidden; display: block;">
+                          <li><a href="/addAdmin">Add Admin</a></li>
+                          <li><a href="/manage_users">Manage Users</a></li>
+						  <li><a href="/edit_shed">Edit Shed Details</a></li>
+						  <li><a href="/statistics">Statistics</a></li>
+                      </ul>
+                  </li>
+		{% endif %}
+{% endblock %}
